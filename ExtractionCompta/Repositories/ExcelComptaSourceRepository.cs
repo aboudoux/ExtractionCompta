@@ -32,7 +32,7 @@ namespace ExtractionCompta.Repositories
             var excel = new ExcelQueryFactory(_excelFilePath);
             var query = excel.Worksheet<TableauExcel>(sheetName).ToList();
 
-            return query.Select(a => new SourceLine(a.Id, a.Libelle, a.MontantHt, a.MontantTtc, new Compte(a.Compte), a.DateVersement, a.IdVersement)).ToList();
+            return query.Select(a => new SourceLine(a.Id, a.Libelle, a.MontantHt, a.MontantTtc, new Compte(a.Compte), a.DateVersement, a.IdVersement, !string.IsNullOrWhiteSpace(a.Cca))).ToList();
         }
     }
 }
