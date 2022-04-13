@@ -9,6 +9,7 @@ namespace ExtractionCompta
     {
         protected readonly List<SourceLine> _lines;
         protected bool IsSingleLine { get; }
+        protected bool CompteCourant { get; }
 
         protected Versements(List<SourceLine> lines)
         {
@@ -23,7 +24,7 @@ namespace ExtractionCompta
 
             _lines = lines;
             IsSingleLine = _lines.Count == 1;
-            
+            CompteCourant = lines.Any(a => a.Cca);
         }
 
         public List<DestinationLine> ToOutputLines()
@@ -32,20 +33,20 @@ namespace ExtractionCompta
 
             foreach (var line in _lines)
             {
-                result.Add(ExtractHt(line).FromMultipleVersement(!IsSingleLine));
+                result.Add(ExtractHt(line).FromMultipleVersement(!IsSingleLine).FromCompteCourant(CompteCourant));
                 if( line.MontantTva > 0 )
-                    result.Add(ExtractTva(line).FromMultipleVersement(!IsSingleLine));
-                if( !IsSingleLine)
-                    result.Add(ExtractCompteCourant(line).FromMultipleVersement(!IsSingleLine));
+                    result.Add(ExtractTva(line).FromMultipleVersement(!IsSingleLine).FromCompteCourant(CompteCourant));
+                if( CompteCourant)
+                    result.Add(ExtractCompteCourant(line).FromMultipleVersement(!IsSingleLine).FromCompteCourant(CompteCourant));
             }
 
             var dateVersement = _lines.First().DateVersement.Value;
             var montantTotalVersements = _lines.Sum(a => a.MontantTva + a.MontantHt);
 
-            if (!IsSingleLine)
-                result.Add(CreateVirementCompteCourant(dateVersement, montantTotalVersements).FromMultipleVersement(!IsSingleLine));
+            if (CompteCourant)
+                result.Add(CreateVirementCompteCourant(dateVersement, montantTotalVersements).FromMultipleVersement(!IsSingleLine).FromCompteCourant(CompteCourant));
 
-            result.Add(CreateBanque(dateVersement, montantTotalVersements).FromMultipleVersement(!IsSingleLine));
+            result.Add(CreateBanque(dateVersement, montantTotalVersements).FromMultipleVersement(!IsSingleLine).FromCompteCourant(CompteCourant));
 
             return result;
         }

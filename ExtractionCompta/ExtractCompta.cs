@@ -35,7 +35,7 @@ namespace ExtractionCompta
             var banqueLines = new List<DestinationLine>();
 
             foreach (var line in lines) {
-                if (line.LineComeFromMultipleVersement && line.Libelle != Libelle.Virement)
+                if (line.LineFromCompteCourant && line.Libelle != Libelle.Virement)
                     odLines.Add(line);
                 else
                     banqueLines.Add(line);                

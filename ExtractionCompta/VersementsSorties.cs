@@ -23,7 +23,7 @@ namespace ExtractionCompta
         }
 
         protected override DestinationLine CreateBanque(DateTime dateVersement, decimal total) {
-            var libelle = IsSingleLine ? _lines.First().Libelle : "Virement bancaire";
+            var libelle = (IsSingleLine && !CompteCourant) ? _lines.First().Libelle : Libelle.Virement;
             return new DestinationLine(dateVersement, new Compte(Compte.BANQUE), libelle, null, total);
         }
 

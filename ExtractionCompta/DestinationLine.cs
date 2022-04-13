@@ -33,11 +33,18 @@ namespace ExtractionCompta
         public decimal? Credit {get; }
 
         public bool LineComeFromMultipleVersement { get; private set; }
+        public bool LineFromCompteCourant { get; private set; }
 
         public DestinationLine FromMultipleVersement(bool value)
         {
             LineComeFromMultipleVersement = value;
             return this;
+        }
+
+        public DestinationLine FromCompteCourant(bool value) 
+        {
+	        LineFromCompteCourant = value;
+	        return this;
         }
     }
 }

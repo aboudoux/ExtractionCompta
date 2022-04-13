@@ -6,7 +6,7 @@ using FluentAssertions;
 using LinqToExcel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtractionCompta.Tests
+namespace ExtractionCompta.Tests.Repositories
 {
     [TestClass]
     public class SourceRepositoryTests

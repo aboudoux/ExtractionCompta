@@ -59,7 +59,7 @@ namespace ExtractionCompta.Tests
             if( !string.IsNullOrWhiteSpace(compte) )
                 numeroCompte = new Compte(compte);
 
-            var line = new SourceLine(lineId, libelle, (decimal)montantHt, (decimal)montantTva, numeroCompte, lineDate, versementId);
+            var line = new SourceLine(lineId, libelle, (decimal)montantHt, (decimal)montantTva, numeroCompte, lineDate, versementId, false);
         }
 
         [DataTestMethod]
@@ -76,7 +76,7 @@ namespace ExtractionCompta.Tests
             if (!string.IsNullOrWhiteSpace(compte))
                 numeroCompte = new Compte(compte);
 
-            var line = new SourceLine(lineId, libelle, (decimal)montantHt, (decimal)montantTva, numeroCompte, lineDate, versementId);
+            var line = new SourceLine(lineId, libelle, (decimal)montantHt, (decimal)montantTva, numeroCompte, lineDate, versementId, false);
             Assert.IsNotNull(line);
         }
 

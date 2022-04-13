@@ -7,7 +7,7 @@ namespace ExtractionCompta
 {
     public class SourceLine
     {
-        public SourceLine(int? lineId, string libelle, decimal montantHt, decimal montantTva, Compte compte, DateTime? dateVersement, int? versementId)
+        public SourceLine(int? lineId, string libelle, decimal montantHt, decimal montantTva, Compte compte, DateTime? dateVersement, int? versementId, bool cca)
         {
             if (!lineId.HasValue)
                 throw new LineIdNotDefinedException();
@@ -27,6 +27,7 @@ namespace ExtractionCompta
             Compte = compte;
             DateVersement = dateVersement;
             VersementId = versementId;
+            Cca = cca;
         }
 
         public int? LineId { get; }
@@ -36,5 +37,7 @@ namespace ExtractionCompta
         public Compte Compte { get; }
         public DateTime? DateVersement { get; }
         public int? VersementId { get; }
+
+        public bool Cca { get; }
     }
 }

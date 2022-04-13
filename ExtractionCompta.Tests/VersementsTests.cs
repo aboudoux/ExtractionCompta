@@ -21,8 +21,8 @@ namespace ExtractionCompta.Tests
         public void MulptipleLinesWithDifferentVersementIdShouldFail() {
             var inputs = new List<SourceLine>()
             {
-                new SourceLine(1, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1),
-                new SourceLine(2, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 2),
+                new SourceLine(1, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1, false),
+                new SourceLine(2, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 2, false),
             };
             var versements = new VersementsSorties(inputs);
         }
@@ -31,9 +31,9 @@ namespace ExtractionCompta.Tests
         public void MulptipleLinesWithSameVersementIdShouldBeOk() {
             var inputs = new List<SourceLine>()
             {
-                new SourceLine(1, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1),
-                new SourceLine(2, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1),
-                new SourceLine(3, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1),
+                new SourceLine(1, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1, false),
+                new SourceLine(2, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1, false),
+                new SourceLine(3, "TEST", 1, 1, new Compte("123456"), DateTime.Now, 1, false),
             };
             var versements = new VersementsSorties(inputs);
             versements.Should().NotBeNull();

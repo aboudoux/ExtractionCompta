@@ -23,5 +23,8 @@ namespace ExtractionCompta.Repositories
         public DateTime? DateVersement { get; set; }
         [ExcelColumn("Id versement")]
         public int? IdVersement { get; set; }
+
+        [ExcelColumn("CCA")]
+        public string Cca { get; set; }
     }
 }
