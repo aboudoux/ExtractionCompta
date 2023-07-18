@@ -30,7 +30,7 @@ namespace ExtractionCompta.Repositories
         private IEnumerable<SourceLine> ReadExcelSheet(string sheetName)
         {
             var excel = new ExcelQueryFactory(_excelFilePath);
-            var query = excel.Worksheet<TableauExcel>(sheetName).ToList();
+            var query = excel.Worksheet<TableauExcel>(sheetName).Where(a=>a.Id > 0).ToList();
 
             return query.Select(a => new SourceLine(a.Id, a.Libelle, a.MontantHt, a.MontantTtc, new Compte(a.Compte), a.DateVersement, a.IdVersement, !string.IsNullOrWhiteSpace(a.Cca))).ToList();
         }
